@@ -7,11 +7,12 @@
       </div>
       <div class="col-md-2">
         <%= button_tag(type: :submit, class: "btn btn-default") do %>
-          <i class="fa fa-search"></i> Look Up a Stock
+          <i class="fa fa-search"></i> Search
         <% end %>
       </div>
     </div>
   <% end %>
+  <%= render 'common/spinner' %>
   <% if @stock %>
     <div id="stock-lookup-results">
       <strong>Symbol:</strong> <%= @stock.ticker %>
@@ -19,5 +20,5 @@
       <strong>Price:</strong> <%= @stock.price %>
     </div>
   <% end %>
-  <div id="stock-lookup-erros"></div>
+  <div id="stock-lookup-errors"></div>
 </div>
