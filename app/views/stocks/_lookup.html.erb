@@ -24,6 +24,18 @@
       <strong>Symbol:</strong> <%= @stock.ticker %>
       <strong>Name:</strong> <%= @stock.name %>
       <strong>Price:</strong> <%= @stock.price %>
+      <% if current_user.can_add_stock?(@stock.ticker) %>
+        <%= link_to "Add", user_stocks_path(user: current_user, stock_ticker: @stock.ticker, stock_id: @stock.id ? @stock.id : ''), class: "btn btn-success", method: :post %>
+      <% else %>
+        <span class="label label-info">
+          <% if !current_user.under_stock_limit? %>
+          You cannot add more than 10 stocks
+          <% end %>
+          <% if current_user.stock_already_added?(@stock.ticker) %>
+          This stock is already in your list
+          <% end %>
+        </span>
+      <% end %>
     </div>
   </div>
   <% end %>
